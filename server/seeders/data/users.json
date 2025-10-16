@@ -1,0 +1,14 @@
+[
+  { 
+    "email": "demo@recipely.app", 
+    "name": "Demo User",
+    "password": "password123",
+    "role": "user"
+  },
+  { 
+    "email": "chef@recipely.app", 
+    "name": "Chef Master",
+    "password": "password123",
+    "role": "chef"
+  }
+]

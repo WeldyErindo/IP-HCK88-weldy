@@ -1,9 +1,15 @@
 :root { --radius: 1rem; --bg-accent: #eef5ff; --chip: #23C55E; }
+
+* {
+  scroll-behavior: smooth;
+}
+
 body {
   background:
     radial-gradient(1200px 500px at 60% -20%, var(--bg-accent) 0%, rgba(255,255,255,0) 60%)
     #fff;
 }
+
 .card.rounded-4 { border-radius: var(--radius) !important; }
 .card .ratio img { border-top-left-radius: var(--radius); border-top-right-radius: var(--radius); object-fit: cover; }
 .badge-chip { background: var(--chip); box-shadow: 0 4px 14px rgba(0,0,0,.12); letter-spacing: .2px; }
@@ -14,6 +20,24 @@ body {
 .modal-backdrop.show { opacity: .35; }
 @media (max-width: 576px) { .ratio.ratio-16x9 { --bs-aspect-ratio: 70%; } }
 
-
 .card { position: relative; z-index: 0; }
-.badge-chip { pointer-events: none; }          
+.badge-chip { pointer-events: none; }
+
+
+::-webkit-scrollbar {
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}           
