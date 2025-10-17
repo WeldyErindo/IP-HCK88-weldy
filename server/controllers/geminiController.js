@@ -1,6 +1,5 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-// Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 exports.generateRecipe = async (req, res, next) => {
@@ -18,10 +17,8 @@ exports.generateRecipe = async (req, res, next) => {
       });
     }
 
-    // Get the generative model - use gemini-2.5-flash (stable version from October 2025)
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-    // Create a detailed prompt for recipe generation
     const prompt = `Create a detailed recipe based on this request: "${query}"
 
 Please provide the recipe in the following JSON format (respond ONLY with valid JSON, no markdown):
@@ -40,15 +37,14 @@ Please provide the recipe in the following JSON format (respond ONLY with valid 
 
 Make it detailed, practical, and delicious!`;
 
-    // Generate content
     const result = await model.generateContent(prompt);
     const response = result.response;
     const text = response.text();
 
-    // Try to parse the JSON response
+   
     let recipeData;
     try {
-      // Remove markdown code blocks if present
+     
       const cleanedText = text
         .replace(/```json\n?/g, "")
         .replace(/```\n?/g, "")
@@ -62,7 +58,7 @@ Make it detailed, practical, and delicious!`;
       });
     }
 
-    // Validate required fields
+   
     if (!recipeData.title || !recipeData.instructions) {
       return res.status(500).json({
         error: "AI response missing required fields",
@@ -70,7 +66,7 @@ Make it detailed, practical, and delicious!`;
       });
     }
 
-    // Add default values for optional fields
+  
     recipeData.thumbnail =
       recipeData.thumbnail ||
       "https://via.placeholder.com/400x300?text=AI+Generated+Recipe";
@@ -87,7 +83,6 @@ Make it detailed, practical, and delicious!`;
   } catch (error) {
     console.error("Gemini API Error:", error);
 
-    // Provide more specific error messages
     let errorMessage = "Failed to generate recipe with AI";
 
     if (error.message && error.message.includes("404")) {
