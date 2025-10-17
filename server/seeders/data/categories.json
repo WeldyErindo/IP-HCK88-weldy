@@ -1,0 +1,9 @@
+[
+  { "name": "Beef", "slug": "beef" },
+  { "name": "Chicken", "slug": "chicken" },
+  { "name": "Dessert", "slug": "dessert" },
+  { "name": "Lamb", "slug": "lamb" },
+  { "name": "Pasta", "slug": "pasta" },
+  { "name": "Seafood", "slug": "seafood" },
+  { "name": "Vegetarian", "slug": "vegetarian" }
+]

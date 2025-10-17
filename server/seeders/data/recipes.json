@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Beef Wellington",
+    "thumbnail": "https://www.themealdb.com/images/media/meals/vvpprx1487325699.jpg",
+    "ingredients": [
+      { "name": "Beef Fillet", "amount": "750g" },
+      { "name": "Mushrooms", "amount": "400g" },
+      { "name": "Puff Pastry", "amount": "500g" }
+    ],
+    "instructions": "Sear beef, make duxelles, wrap with pastry, bake until golden.",
+    "durationMinutes": 90,
+    "sourceUrl": "https://youtu.be/3Q7AJiZ7nJQ",
+    "categorySlug": "beef",
+    "userEmail": "demo@recipely.app"
+  },
+  {
+    "title": "Chocolate Mousse",
+    "thumbnail": "https://www.themealdb.com/images/media/meals/qrqywr1503066605.jpg",
+    "ingredients": [
+      { "name": "Dark Chocolate", "amount": "200g" },
+      { "name": "Eggs", "amount": "3" },
+      { "name": "Sugar", "amount": "2 tbsp" }
+    ],
+    "instructions": "Melt chocolate, fold with whipped eggs, chill until set.",
+    "durationMinutes": 30,
+    "sourceUrl": "https://youtu.be/dummy-choco",
+    "categorySlug": "dessert",
+    "userEmail": "chef@recipely.app"
+  }
+]
