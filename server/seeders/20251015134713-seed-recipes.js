@@ -27,8 +27,8 @@ module.exports = {
 
     const col = rows?.[0] || {};
     const fullType = String(col.full_type || '').toLowerCase(); 
-    const isJsonb  = fullType.includes('jsonb') || udtName === 'jsonb';
-    const isTextArr = fullType.endsWith('[]') || udtName.startsWith('_');
+    const isJsonb  = fullType.includes('jsonb') || udt_name === 'jsonb';
+    const isTextArr = fullType.endsWith('[]') || udt_name.startsWith('_');
 
     // helper
     const toLine = (i) =>
