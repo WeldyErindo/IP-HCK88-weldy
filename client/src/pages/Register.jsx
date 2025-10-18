@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import API_ENDPOINTS from "../config/api";
 
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "", role: "user" });
@@ -12,7 +13,7 @@ export default function Register() {
   async function onSubmit(e) { 
     e.preventDefault(); 
     try {
-      await axios.post("http://localhost:4000/apis/auth/register", form);
+  await axios.post(API_ENDPOINTS.auth.register, form);
       
      
       const roleMessage = form.role === 'chef' ? 

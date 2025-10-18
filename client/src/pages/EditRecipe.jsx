@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
+import API_ENDPOINTS from "../config/api";
 
 const COUNTRIES = [
   "American", "British", "Canadian", "Chinese", "Croatian", "Dutch", "Egyptian", 
@@ -57,7 +58,7 @@ export default function EditRecipe() {
 
   const fetchCategories = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/apis/categories");
+  const { data } = await axios.get(API_ENDPOINTS.categories.all);
       setCategories(data);
     } catch (error) {
       console.error("Failed to fetch categories:", error);
@@ -67,7 +68,7 @@ export default function EditRecipe() {
   const fetchRecipe = async () => {
     try {
       const token = localStorage.getItem("access_token");
-      const { data } = await axios.get(`http://localhost:4000/apis/recipes/${id}`, {
+  const { data } = await axios.get(API_ENDPOINTS.recipes.byId(id), {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -147,7 +148,7 @@ export default function EditRecipe() {
       };
 
       await axios.put(
-        `http://localhost:4000/apis/recipes/${id}`,
+  API_ENDPOINTS.recipes.update(id),
         payload,
         {
           headers: {

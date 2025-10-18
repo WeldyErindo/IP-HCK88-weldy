@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
+import API_ENDPOINTS from "../config/api";
 
 const API_BASE = (import.meta.env.VITE_MEALDB_BASE || "https://www.themealdb.com").replace(/\/+$/, "");
 const API_KEY  = import.meta.env.VITE_MEALDB_KEY || "1";
@@ -47,7 +48,7 @@ async function fetchDetailFromMealDB(id) {
 
 async function fetchDetailFromDB(id) {
   try {
-    const { data } = await axios.get(`http://localhost:4000/apis/recipes/${id}`);
+  const { data } = await axios.get(API_ENDPOINTS.recipes.byId(id));
     
    
     const ingredients = Array.isArray(data.ingredients) 
