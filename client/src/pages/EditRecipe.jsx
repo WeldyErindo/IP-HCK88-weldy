@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
-import axios from "axios";
 import Swal from "sweetalert2";
+import api from "../config/api";
 
 const COUNTRIES = [
   "American", "British", "Canadian", "Chinese", "Croatian", "Dutch", "Egyptian", 
@@ -57,7 +57,7 @@ export default function EditRecipe() {
 
   const fetchCategories = async () => {
     try {
-  const { data } = await axios.get("https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/categories");
+  const { data } = await api.get("/apis/categories");
       setCategories(data);
     } catch (error) {
       console.error("Failed to fetch categories:", error);
@@ -66,12 +66,7 @@ export default function EditRecipe() {
 
   const fetchRecipe = async () => {
     try {
-      const token = localStorage.getItem("access_token");
-  const { data } = await axios.get(`https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/recipes/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+  const { data } = await api.get(`/apis/recipes/${id}`);
 
       let ingredientsString = "";
       if (Array.isArray(data.ingredients)) {
@@ -146,15 +141,7 @@ export default function EditRecipe() {
         CategoryId: form.CategoryId ? parseInt(form.CategoryId) : null
       };
 
-      await axios.put(
-  `https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/recipes/${id}`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
+      await api.put(`/apis/recipes/${id}`, payload);
 
       Swal.fire({
         title: "Success!",

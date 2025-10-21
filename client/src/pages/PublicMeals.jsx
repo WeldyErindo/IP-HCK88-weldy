@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
 import SearchBar from "../components/SearchBar.jsx";
 import CategoryPills from "../components/CategoryPills.jsx";
 import RecipeCard from "../components/RecipeCard.jsx";
+import api from "../config/api";
 
 const API_BASE = (import.meta.env.VITE_MEALDB_BASE || "https://www.themealdb.com").replace(/\/+$/, "");
 const API_KEY  = import.meta.env.VITE_MEALDB_KEY || "1";
@@ -41,7 +41,7 @@ async function fetchCardsAZ() {
 
 async function fetchUserRecipes() {
   try {
-  const { data } = await axios.get("https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/recipes");
+  const { data } = await api.get("/apis/recipes");
     return data.map(recipe => ({
       id: `db-${recipe.id}`, 
       title: recipe.title,
@@ -141,7 +141,7 @@ export default function PublicMeals() {
     setGeminiLoading(true);
     
     try {
-  const { data } = await axios.post("https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/gemini/generate", {
+  const { data } = await api.post("/apis/gemini/generate", {
         query: q
       });
       

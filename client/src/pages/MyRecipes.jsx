@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import axios from "axios";
 import Swal from "sweetalert2";
+import api from "../config/api";
 
 export default function MyRecipes() {
   const navigate = useNavigate();
@@ -27,12 +27,7 @@ export default function MyRecipes() {
 
   const fetchMyRecipes = async () => {
     try {
-      const token = localStorage.getItem("access_token");
-  const { data } = await axios.get("https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/recipes/my", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const { data } = await api.get("/apis/recipes/my");
       
       setRecipes(data);
       setLoading(false);
@@ -54,12 +49,7 @@ export default function MyRecipes() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const token = localStorage.getItem("access_token");
-          await axios.delete(`https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/recipes/${id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
+          await api.delete(`/apis/recipes/${id}`);
 
           Swal.fire({
             title: "Deleted!",

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
+import api from "../config/api";
 
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "", role: "user" });
@@ -12,7 +12,7 @@ export default function Register() {
   async function onSubmit(e) { 
     e.preventDefault(); 
     try {
-  await axios.post("https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/auth/register", form);
+  await api.post("/apis/auth/register", form);
       
      
       const roleMessage = form.role === 'chef' ? 

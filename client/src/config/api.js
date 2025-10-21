@@ -1,27 +1,27 @@
-// API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+import axios from "axios";
 
-export const API_ENDPOINTS = {
-  baseUrl: API_BASE_URL,
-  auth: {
-    login: `${API_BASE_URL}/apis/auth/login`,
-    register: `${API_BASE_URL}/apis/auth/register`,
-    google: `${API_BASE_URL}/apis/auth/google`,
-  },
-  recipes: {
-    all: `${API_BASE_URL}/apis/recipes`,
-    my: `${API_BASE_URL}/apis/recipes/my`,
-    byId: (id) => `${API_BASE_URL}/apis/recipes/${id}`,
-    create: `${API_BASE_URL}/apis/recipes`,
-    update: (id) => `${API_BASE_URL}/apis/recipes/${id}`,
-    delete: (id) => `${API_BASE_URL}/apis/recipes/${id}`,
-  },
-  categories: {
-    all: `${API_BASE_URL}/apis/categories`,
-  },
-  gemini: {
-    generate: `${API_BASE_URL}/apis/gemini/generate`,
-  },
-};
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://54.206.74.76:4000";
 
-export default API_ENDPOINTS;
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Add request interceptor to include auth token
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export default api;
+export { API_BASE_URL };

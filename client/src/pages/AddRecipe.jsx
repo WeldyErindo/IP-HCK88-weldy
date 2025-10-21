@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import axios from "axios";
 import Swal from "sweetalert2";
+import api from "../config/api";
 
 const COUNTRIES = [
   "American", "British", "Canadian", "Chinese", "Croatian", "Dutch", "Egyptian", 
@@ -53,7 +53,7 @@ export default function AddRecipe() {
 
   const fetchCategories = async () => {
     try {
-  const { data } = await axios.get("https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/categories");
+  const { data } = await api.get("/apis/categories");
       setCategories(data);
     } catch (error) {
       console.error("Failed to fetch categories:", error);
@@ -99,15 +99,7 @@ export default function AddRecipe() {
         CategoryId: form.CategoryId ? parseInt(form.CategoryId) : null
       };
 
-      await axios.post(
-  "https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/recipes",
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
+      await api.post("/apis/recipes", payload);
 
       Swal.fire({
         title: "Success!",

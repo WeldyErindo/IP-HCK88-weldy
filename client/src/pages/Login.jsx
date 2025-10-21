@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
-import axios from "axios"
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router"
+import api from "../config/api"
 
 export default function Login() {
     const navigate = useNavigate()
@@ -18,7 +18,7 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const { data } = await axios.post(`https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/auth/login`, form)
+            const { data } = await api.post(`/apis/auth/login`, form)
    
             localStorage.setItem("access_token", data.access_token)
             
@@ -56,7 +56,7 @@ export default function Login() {
             }
             
        
-            const { data } = await axios.post("https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/auth/google", {
+            const { data } = await api.post("/apis/auth/google", {
                 googleToken: response.credential
             });
             
