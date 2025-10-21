@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
-import API_ENDPOINTS from "../config/api";
 
 export default function MyRecipes() {
   const navigate = useNavigate();
@@ -29,7 +28,7 @@ export default function MyRecipes() {
   const fetchMyRecipes = async () => {
     try {
       const token = localStorage.getItem("access_token");
-  const { data } = await axios.get(API_ENDPOINTS.recipes.my, {
+  const { data } = await axios.get("https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/recipes/my", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -56,7 +55,7 @@ export default function MyRecipes() {
       if (result.isConfirmed) {
         try {
           const token = localStorage.getItem("access_token");
-          await axios.delete(API_ENDPOINTS.recipes.delete(id), {
+          await axios.delete(`https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/recipes/${id}`, {
             headers: {
               Authorization: `Bearer ${token}`
             }

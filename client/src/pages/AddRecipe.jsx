@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
-import API_ENDPOINTS from "../config/api";
 
 const COUNTRIES = [
   "American", "British", "Canadian", "Chinese", "Croatian", "Dutch", "Egyptian", 
@@ -54,7 +53,7 @@ export default function AddRecipe() {
 
   const fetchCategories = async () => {
     try {
-  const { data } = await axios.get(API_ENDPOINTS.categories.all);
+  const { data } = await axios.get("https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/categories");
       setCategories(data);
     } catch (error) {
       console.error("Failed to fetch categories:", error);
@@ -101,7 +100,7 @@ export default function AddRecipe() {
       };
 
       await axios.post(
-  API_ENDPOINTS.recipes.create,
+  "https://steering-nurses-unlimited-southwest.trycloudflare.com/apis/recipes",
         payload,
         {
           headers: {

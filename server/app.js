@@ -23,7 +23,23 @@ const routes = require('./routes');
 
 const app = express();
 
-app.use(cors());
+// CORS configuration - allow Firebase hosting, localhost, and tunnel
+const corsOptions = {
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://recipely-e12fc.web.app',
+    'https://recipely-e12fc.firebaseapp.com',
+    'https://recipely.weldy.fun',
+    'https://api.recipely.weldy.fun',
+    'https://recipely-weldy-api.loca.lt'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Bypass-Tunnel-Reminder']
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());           
 app.use(express.urlencoded({ extended: true }));
 
